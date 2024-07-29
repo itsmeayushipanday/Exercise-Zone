@@ -9,7 +9,7 @@ const HeroTitle = () => {
       position="relative"
       p="20px"
     >
-      <Typography color="#FF2625" fontWeight="600" fontSize="26">
+      <Typography variant="h4" color="#FF2625" fontWeight="600" fontSize="26">
         Fitness Club
       </Typography>
       <Typography

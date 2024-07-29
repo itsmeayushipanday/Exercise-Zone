@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import ExerciseDetails from "./pages/ExerciseDetails";
 import "./index.css";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/exercise/:id" element={<ExerciseDetails />} />{" "}
         {/* to get dynamic routes for id */}
       </Routes>
+      <Footer />
     </Box>
   );
 };

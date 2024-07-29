@@ -47,10 +47,10 @@ body {
   flex-wrap: wrap;
 }
 
-.detail-image {
+/* .detail-image {
   width: 729px;
   height: 742px;
-}
+} */
 
 .hero-banner-img {
   position: absolute;
