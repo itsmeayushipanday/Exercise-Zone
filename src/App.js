@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import ExerciseDetails from "./pages/ExerciseDetails";
 import "./index.css";
 import Footer from "./components/Footer";
+import Gemini from "./components/Gemini";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/exercise/:id" element={<ExerciseDetails />} />{" "}
+        <Route path="/gemini" element={<Gemini />} />
         {/* to get dynamic routes for id */}
       </Routes>
       <Footer />
