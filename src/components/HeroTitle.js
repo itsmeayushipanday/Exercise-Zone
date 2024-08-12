@@ -1,6 +1,5 @@
 import React from "react";
 import { Box, Stack, Typography } from "@mui/material";
-import HeroBannerImage from "../assets/images/banner.png";
 
 const HeroTitle = () => {
   return (
@@ -55,7 +54,7 @@ const HeroTitle = () => {
         Exercise Zone
       </Typography>
       <img
-        src={HeroBannerImage}
+        src="https://www.shutterstock.com/image-vector/cartoon-kids-yoga-different-poses-600nw-1147388369.jpg"
         alt="hero-banner"
         className="hero-banner-img"
       />

@@ -3,9 +3,24 @@ import { Link } from "react-router-dom";
 import { Stack } from "@mui/material";
 
 import Logo from "../assets/images/Logo.png";
-import Gemini from "./Gemini";
+import { useTheme } from "../context/ThemeContext";
+import ThemedComponent from "./ThemedComponent";
 
 const Navbar = () => {
+  const { theme } = useTheme();
+  const linkStyles = {
+    light: {
+      colorHome: "#272525",
+      colorExercises: "#3A1212",
+      borderColor: "#1f1672",
+    },
+    dark: {
+      colorHome: "#FFFFFF",
+      colorExercises: "#CCCCCC",
+      borderColor: "#ffffff",
+    },
+  };
+
   return (
     <Stack
       direction="row"
@@ -29,13 +44,21 @@ const Navbar = () => {
       >
         <Link
           to="/"
-          className="text-[#3A1212] border-b-[3px] border-[#1f1672] no-underline"
+          className={`border-b-[3px] no-underline`}
+          style={{
+            color: linkStyles[theme].colorHome,
+            borderColor: linkStyles[theme].borderColor,
+          }}
         >
           Home
         </Link>
         <a
           href="#exercises"
-          className="text-[#3A1212] border-b-[3px] border-[#1f1672] no-underline"
+          className="no-underline"
+          style={{
+            color: linkStyles[theme].colorExercises,
+            borderBottom: `3px solid ${linkStyles[theme].borderColor}`,
+          }}
         >
           Exercises
         </a>
@@ -45,6 +68,7 @@ const Navbar = () => {
             <Link to="/gemini">Get AI Assistant</Link>
           </div>
         </button>
+        <ThemedComponent />
       </Stack>
     </Stack>
   );
