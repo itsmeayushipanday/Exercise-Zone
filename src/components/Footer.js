@@ -19,6 +19,7 @@ const Footer = () => (
       mt="41px"
       textAlign="center"
       pb="40px"
+      className="text-pink-800"
     >
       Made with ❤️ by Ayushi Panday
     </Typography>

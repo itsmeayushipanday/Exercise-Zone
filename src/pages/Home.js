@@ -8,7 +8,7 @@ const Home = () => {
   const [bodyPart, setBodyPart] = useState("all"); //used here both of them bcoz they will
   const [exercises, setExercises] = useState([]); //get rendered on home page itself
 
-  console.log(bodyPart);
+  //console.log(bodyPart);
 
   return (
     <Box>

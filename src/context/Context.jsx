@@ -40,6 +40,10 @@ const ContextProvider = (props) => {
     "weightlifting",
     "calories",
     "stretching",
+    "push-ups",
+    "strong",
+    "body",
+    "breathing",
   ];
 
   const isExerciseRelated = (query) => {

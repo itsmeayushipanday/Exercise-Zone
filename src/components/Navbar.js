@@ -63,8 +63,8 @@ const Navbar = () => {
           Exercises
         </a>
         <button className="p-[3px] relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-red-300 to-pink-500 rounded-lg" />
-          <div className="px-8 py-2  bg-gray-400 rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-pink-500 rounded-lg" />
+          <div className="px-8 py-2  bg-gray-500 rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
             <Link to="/gemini">Get AI Assistant</Link>
           </div>
         </button>

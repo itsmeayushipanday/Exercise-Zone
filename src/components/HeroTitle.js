@@ -8,8 +8,8 @@ const HeroTitle = () => {
       position="relative"
       p="20px"
     >
-      <Typography variant="h4" color="#FF2625" fontWeight="600" fontSize="26">
-        Fitness Club
+      <Typography variant="h4" color="#F53173" fontWeight="600" fontSize="26">
+        AI-Powered Fitness Club
       </Typography>
       <Typography
         fontWeight={700}
@@ -17,10 +17,10 @@ const HeroTitle = () => {
         mb="23px"
         mt="30px"
       >
-        Sweat, Smile <br />
+        Stretch, Strengthen <br />
         And Repeat
       </Typography>
-      <Typography fontSize="22px" fontFamily="Alegreya" lineHeight="35px">
+      <Typography fontSize="23px" fontFamily="Alegreya" lineHeight="35px">
         Check out the most effective exercises personalized to you
       </Typography>
       <Stack>
@@ -31,7 +31,7 @@ const HeroTitle = () => {
             textDecoration: "none",
             width: "200px",
             textAlign: "center",
-            background: "#FF2625",
+            background: "#F53173",
             padding: "14px",
             fontSize: "22px",
             textTransform: "none",
@@ -44,11 +44,11 @@ const HeroTitle = () => {
       </Stack>
       <Typography
         fontWeight={600}
-        color="#FF2625"
+        color="#F53173"
         sx={{
-          opacity: "0.1",
+          opacity: "0.15",
           display: { lg: "block", xs: "none" },
-          fontSize: "170px",
+          fontSize: "200px",
         }}
       >
         Exercise Zone
