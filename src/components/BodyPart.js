@@ -1,3 +1,4 @@
+//home page-->body parts scroller component
 import React from "react";
 import { Stack, Typography } from "@mui/material";
 import Icon from "../assets/icons/gym.png";
@@ -12,7 +13,7 @@ const BodyPart = ({ item, bodyPart, setBodyPart }) => {
       sx={
         bodyPart === item
           ? {
-              borderTop: "4px solid #FF2625",
+              borderTop: "4px solid #F53173",
               background: "#fff",
               borderBottomLeftRadius: "20px",
               width: "270px",
@@ -30,7 +31,7 @@ const BodyPart = ({ item, bodyPart, setBodyPart }) => {
             }
       }
       onClick={() => {
-        setBodyPart(item);
+        setBodyPart(item); //shows relevent exercise bottom page-->Showing results
         window.scrollTo({ top: 1800, left: 100, behavior: "smooth" });
       }}
     >
