@@ -1,5 +1,8 @@
+//react import
 import React, { useState } from "react";
+//material ui import
 import { Box } from "@mui/material";
+//component import
 import HeroTitle from "../components/HeroTitle";
 import SearchExercises from "../components/SearchExercises";
 import Exercises from "../components/Exercises";

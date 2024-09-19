@@ -1,13 +1,18 @@
+// React imports
 import React from "react";
-import "./App.css";
 import { Route, Routes } from "react-router-dom";
+// Material UI imports
 import { Box } from "@mui/material";
+//components imports
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
-import ExerciseDetails from "./pages/ExerciseDetails";
-import "./index.css";
 import Footer from "./components/Footer";
 import Gemini from "./components/Gemini";
+import ExerciseDetails from "./pages/ExerciseDetails";
+//styling imports
+import "./index.css";
+import "./App.css";
+import "animate.css";
 
 const App = () => {
   return (

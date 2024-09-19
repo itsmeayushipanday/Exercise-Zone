@@ -1,40 +1,36 @@
+//react imports
 import React from "react";
 import { Link } from "react-router-dom";
+//material imports
 import { Stack } from "@mui/material";
-
+//logo imports
 import Logo from "../assets/images/Logo.png";
-import { useTheme } from "../context/ThemeContext";
+//component imports
 import ThemedComponent from "./ThemedComponent";
+import "../App.css";
 
 const Navbar = () => {
-  const { theme } = useTheme();
-  const linkStyles = {
-    light: {
-      colorHome: "#272525",
-      colorExercises: "#3A1212",
-      borderColor: "#1f1672",
-    },
-    dark: {
-      colorHome: "#FFFFFF",
-      colorExercises: "#CCCCCC",
-      borderColor: "#ffffff",
-    },
-  };
-
   return (
     <Stack
-      direction="row"
-      justifyContent="space-around"
+      direction="row" // horizontal
+      justifyContent="space-between" // space out the logo and the rest of the navbar
+      alignItems="center" // vertically center the content
       sx={{
         gap: { sm: "123px", xs: "40px" },
         mt: { sm: "32px", xs: "20px" },
-        justifyContent: "none",
+        px: "20px", // padding on x-axis
       }}
-      className="gap-[40px] sm:gap-[123px] mt-[20px] sm:mt-[32px] px-[20px]"
     >
+      {/* logo link */}
       <Link to="/">
-        <img className="ml-2 mt-2" src={Logo} alt="Logo" />
+        <img
+          className="ml-2 mt-2 w-14 animate__animated animate__backInLeft h-16"
+          src={Logo}
+          alt="Logo"
+          style={{ borderRadius: "50%" }}
+        />
       </Link>
+
       <Stack
         direction="row"
         gap="40px"
@@ -44,30 +40,34 @@ const Navbar = () => {
       >
         <Link
           to="/"
-          className={`border-b-[3px] no-underline`}
-          style={{
-            color: linkStyles[theme].colorHome,
-            borderColor: linkStyles[theme].borderColor,
-          }}
+          className="button-87 animate__animated animate__backInLeft"
         >
           Home
         </Link>
+
         <a
           href="#exercises"
-          className="no-underline"
-          style={{
-            color: linkStyles[theme].colorExercises,
-            borderBottom: `3px solid ${linkStyles[theme].borderColor}`,
-          }}
+          className="button-87 animate__animated animate__backInLeft"
         >
           Exercises
         </a>
-        <button className="p-[3px] relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-pink-500 rounded-lg" />
-          <div className="px-8 py-2  bg-gray-500 rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
-            <Link to="/gemini">Get AI Assistant</Link>
-          </div>
-        </button>
+      </Stack>
+
+      {/* Right side of the navbar */}
+      <Stack
+        direction="row"
+        gap="20px"
+        alignItems="center"
+        justifyContent="flex-end"
+        sx={{ ml: "auto" }} // move this section to the right
+      >
+        <Link
+          to="/gemini"
+          className="button-77 animate__animated animate__backInRight"
+        >
+          Get AI Assistant
+        </Link>
+
         <ThemedComponent />
       </Stack>
     </Stack>

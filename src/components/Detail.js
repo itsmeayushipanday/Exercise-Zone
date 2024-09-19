@@ -64,7 +64,7 @@ const Detail = ({ exerciseDetail }) => {
           </Stack>
         ))}
 
-        <Typography variant="h6">
+        <Typography variant="h5">
           {instructions &&
             instructions.length > 0 &&
             instructions.map((instruction, index) => (

@@ -4,10 +4,11 @@
   display: inline-flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: white;
   padding: 25px 15px;
   position: sticky;
   top: 0;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+  border-radius: 20px; /* Rounded corners */
 }
 
 .sidebar img {
@@ -26,10 +27,10 @@
   align-items: center;
   gap: 10px;
   padding: 10px 15px;
-  background-color: #e6eaf1;
+  background-color: #e6eaf1; /* Default background color for light theme */
   border-radius: 50px;
   font-size: 14px;
-  color: grey;
+  color: grey; /* Default text color for light theme */
   cursor: pointer;
 }
 
@@ -46,6 +47,8 @@
 .sidebar .recent-title {
   margin-top: 30px;
   margin-bottom: 20px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: x-large;
 }
 
 .sidebar .recent-entry {
@@ -55,7 +58,6 @@
   padding: 10px;
   padding-right: 40px;
   border-radius: 50px;
-  color: #282828;
   cursor: pointer;
 }
 

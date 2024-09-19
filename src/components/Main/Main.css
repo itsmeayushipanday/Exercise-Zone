@@ -5,6 +5,11 @@
   position: relative;
 }
 
+.dark-theme {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
 .main .nav {
   display: flex;
   align-items: center;
@@ -12,6 +17,10 @@
   font-size: 22px;
   padding: 20px;
   color: #585858;
+}
+
+.dark-theme .nav {
+  color: #e0e0e0;
 }
 
 .main .nav img {
@@ -29,6 +38,10 @@
   color: #c4c7c5;
   font-weight: 500;
   padding: 20px;
+}
+
+.dark-theme .greet {
+  color: #a0a0a0;
 }
 
 .main .greet span {
@@ -57,6 +70,14 @@
   background-color: rgb(235, 233, 233);
 }
 
+.dark-theme .card {
+  background-color: #1f1f1f;
+}
+
+.dark-theme .card:hover {
+  background-color: #333333;
+}
+
 .main .card img {
   width: 35px;
   padding: 5px;
@@ -70,6 +91,18 @@
 .main .card p {
   color: #585858;
   font-size: 18px;
+}
+
+.dark-theme .card p {
+  color: #d0d0d0;
+}
+
+.card {
+  cursor: pointer; /* Shows hand cursor on hover */
+}
+
+.card:hover {
+  background-color: #e2e6eb; /* Change background on hover */
 }
 
 .main-bottom {
@@ -91,6 +124,10 @@
   border-radius: 50px;
 }
 
+.dark-theme .search-box {
+  background-color: #2b2b2b;
+}
+
 .search-box img {
   width: 24px;
   cursor: pointer;
@@ -103,6 +140,11 @@
   outline: none;
   padding: 8px;
   font-size: 18px;
+  color: inherit;
+}
+
+.dark-input {
+  color: #000000;
 }
 
 .search-box div {
@@ -116,6 +158,14 @@
   margin: 15px auto;
   text-align: center;
   font-weight: 400;
+}
+
+.dark-theme .bottom-info {
+  color: #e0e0e0;
+}
+
+.font-bold.text-2xl {
+  font-size: 20px; /* Increase the font size */
 }
 
 .result {

@@ -1,19 +1,25 @@
+//react imports
 import React, { useEffect, useState } from "react";
+//material imports
 import { Box, Stack, Typography } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
-
+//component imports
 import { exerciseOptions, fetchData } from "../utils/fetchData";
 import ExerciseCard from "./ExerciseCard";
+import { useTheme } from "../context/ThemeContext";
 
 const Exercises = ({ exercises, setExercises, bodyPart }) => {
-  console.log(exercises);
+  //exercise is in Home parent, got to searchExercise where got updated
+  //then this update one prop is passed to Exercises component in Home parent
+  //console.log(exercises);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [exercisesPerPage] = useState(6);
 
   // Pagination
-  const indexOfLastExercise = currentPage * exercisesPerPage;
-  const indexOfFirstExercise = indexOfLastExercise - exercisesPerPage;
+  const indexOfLastExercise = currentPage * exercisesPerPage; //1*6==6
+  const indexOfFirstExercise = indexOfLastExercise - exercisesPerPage; //6-6==0
+  //curr exercises from page 0 to 6
   const currentExercises = exercises.slice(
     indexOfFirstExercise,
     indexOfLastExercise
@@ -21,13 +27,12 @@ const Exercises = ({ exercises, setExercises, bodyPart }) => {
 
   const paginate = (e, value) => {
     setCurrentPage(value);
-
     window.scrollTo({ top: 1800, behavior: "smooth" });
   };
 
   useEffect(() => {
     const fetchExercisesData = async () => {
-      let exercisesData = [];
+      let exercisesData = []; //empty array
 
       if (bodyPart === "all") {
         exercisesData = await fetchData(
@@ -43,7 +48,11 @@ const Exercises = ({ exercises, setExercises, bodyPart }) => {
       setExercises(exercisesData);
     };
     fetchExercisesData();
-  }, [bodyPart]);
+  }, [bodyPart]); //every time bodyPart changes, useEffect will re-render and exercises get's updated
+
+  // Theme mode from custom hook
+  const { themeMode } = useTheme();
+  const isDarkTheme = themeMode === "dark";
 
   return (
     <Box id="exercises" sx={{ mt: { lg: "109px" } }} mt="50px" p="20px">
@@ -57,7 +66,7 @@ const Exercises = ({ exercises, setExercises, bodyPart }) => {
         justifyContent="center"
       >
         {currentExercises.map((exercise, index) => (
-          <ExerciseCard key={index} exercise={exercise} />
+          <ExerciseCard key={index} exercise={exercise} /> //uses this exercise card to render the exercise
         ))}
       </Stack>
       <Stack mt="100px" alignItems="center">
@@ -71,6 +80,21 @@ const Exercises = ({ exercises, setExercises, bodyPart }) => {
             page={currentPage}
             //onChange={(e) => paginate(e, value)}
             onChange={paginate}
+            sx={{
+              "& .MuiPaginationItem-root": {
+                color: isDarkTheme ? "white" : "black", //text color
+              },
+              "& .MuiPaginationItem-ellipsis": {
+                color: isDarkTheme ? "white" : "black", //ellipsis color
+              },
+              "& .MuiPaginationItem-page.Mui-selected": {
+                backgroundColor: isDarkTheme ? "#007bff" : "#e0e0e0", //page color
+                color: isDarkTheme ? "white" : "black",
+              },
+              "& .MuiPaginationItem-root:hover": {
+                backgroundColor: isDarkTheme ? "#0056b3" : "#f5f5f5", //hover color
+              },
+            }}
           />
         )}
       </Stack>

@@ -1,4 +1,6 @@
+//react imports
 import { createContext, useState } from "react";
+//component imports
 import run from "../config/reactgenie";
 
 export const Context = createContext();
@@ -12,12 +14,14 @@ const ContextProvider = (props) => {
   const [resultData, setResultData] = useState("");
   const [prevPromptsResults, setPrevPromptsResults] = useState({});
 
+  //typing effect function
   const delayPara = (index, nextWord) => {
     setTimeout(() => {
       setResultData((prev) => prev + nextWord);
     }, 75 * index);
   };
 
+  //new chat function
   const newChat = () => {
     setLoading(false);
     setShowResult(false);
@@ -25,6 +29,7 @@ const ContextProvider = (props) => {
     setResultData("");
   };
 
+  //exercise related keywords
   const exerciseKeywords = [
     "exercise",
     "workout",
@@ -46,18 +51,22 @@ const ContextProvider = (props) => {
     "breathing",
   ];
 
+  //checks whether the input query is exercise related or not
   const isExerciseRelated = (query) => {
     const lowerCaseQuery = query.toLowerCase();
     return exerciseKeywords.some((keyword) => lowerCaseQuery.includes(keyword));
   };
 
+  //send the request to AI api
   const onSent = async (prompt) => {
     setResultData("");
     setLoading(true);
     setShowResult(true);
 
-    let query = prompt !== undefined ? prompt : input;
+    //set query to prompt or input based on the condition
+    let query = prompt || input;
 
+    //if not exercise related query
     if (!isExerciseRelated(query)) {
       setResultData("Please enter a query specific to exercise only...");
       setLoading(false);
@@ -75,11 +84,13 @@ const ContextProvider = (props) => {
     }
 
     let response = await run(query);
+
     setRecentPrompt(query);
     setPrevPrompts((prev) => [...prev, query]); // Save the current prompt
     setPrevPromptsResults((prev) => ({ ...prev, [query]: response })); // Save result for future reference
 
     let responseArray = response.split("**");
+
     let newResponse = "";
     for (let i = 0; i < responseArray.length; i++) {
       if (i === 0 || i % 2 !== 1) {
@@ -88,6 +99,7 @@ const ContextProvider = (props) => {
         newResponse += "<b>" + responseArray[i] + "</b>";
       }
     }
+
     let newResponse2 = newResponse.split("*").join("</br>");
     let newResponseArray = newResponse2.split(" ");
 
@@ -99,6 +111,7 @@ const ContextProvider = (props) => {
     setInput("");
   };
 
+  //previous response
   const handlePreviousChatClick = (prompt) => {
     setInput(prompt);
     setResultData(prevPromptsResults[prompt] || "No result found.");
@@ -106,6 +119,7 @@ const ContextProvider = (props) => {
     setLoading(false);
   };
 
+  //all shared state and functions that will be shared with child
   const contextValue = {
     prevPrompts,
     setPrevPrompts,

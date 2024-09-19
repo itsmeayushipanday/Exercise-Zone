@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
+//react imports
+import React, { useState, useEffect } from "react";
+//material imports
 import { Box, Stack, Typography, Button, TextField } from "@mui/material";
-import { useState } from "react";
+//component imports
 import { fetchData, exerciseOptions } from "../utils/fetchData";
 import HorizontalScrollbar from "./HorizontalScrollbar";
 
@@ -14,7 +16,8 @@ const SearchExercises = ({ bodyPart, setBodyPart, setExercises }) => {
         "https://exercisedb.p.rapidapi.com/exercises/bodyPartList",
         exerciseOptions
       );
-      setBodyParts(["all", ...bodyPartData]);
+      //console.log(bodyPartData); fetched all body parts on rendering
+      setBodyParts(["all", ...bodyPartData]); //a list of all body parts
     };
     fetchBodyParts();
   }, []);
@@ -25,7 +28,7 @@ const SearchExercises = ({ bodyPart, setBodyPart, setExercises }) => {
         "https://exercisedb.p.rapidapi.com/exercises",
         exerciseOptions
       );
-      /* console.log(exerciseData); */
+      //console.log(exerciseData);
       const searchedExercises = exerciseData.filter(
         (exercise) =>
           exercise.name.toLowerCase().includes(search) ||
@@ -33,7 +36,7 @@ const SearchExercises = ({ bodyPart, setBodyPart, setExercises }) => {
           exercise.equipment.toLowerCase().includes(search) ||
           exercise.bodyPart.toLowerCase().includes(search)
       );
-      /* console.log(searchedExercises); */
+      //console.log(searchedExercises);
       setSearch("");
       setExercises(searchedExercises);
     }
@@ -43,13 +46,21 @@ const SearchExercises = ({ bodyPart, setBodyPart, setExercises }) => {
     <Stack alignItems="center" mt="37px" p="20px" justifyContent="center">
       <Typography
         fontWeight={700}
-        sx={{ fontSize: { lg: "44px", xs: "30px" } }}
+        sx={{
+          fontSize: { lg: "44px", xs: "30px" },
+          animation: "fadeInDown 1s",
+        }}
         mb="49px"
         textAlign="center"
+        className="animate__animated animate__fadeInDown"
       >
         Awesome Exercises You <br /> Should Know
       </Typography>
-      <Box position="relative" mb="72px">
+      <Box
+        position="relative"
+        mb="72px"
+        className="animate__animated animate__bounceIn"
+      >
         <TextField
           sx={{
             input: { fontWeight: "700", border: "none", borderRadius: "4px" },
@@ -64,7 +75,7 @@ const SearchExercises = ({ bodyPart, setBodyPart, setExercises }) => {
           type="text"
         />
         <Button
-          className="search-btn"
+          className="search-btn ml-5"
           sx={{
             bgcolor: "#F53173",
             color: "#fff",
@@ -80,12 +91,15 @@ const SearchExercises = ({ bodyPart, setBodyPart, setExercises }) => {
           Search
         </Button>
       </Box>
-      <Box sx={{ position: "relative", width: "100%", p: "20px" }}>
+      <Box
+        sx={{ position: "relative", width: "100%", p: "20px" }}
+        className="animate__animated animate__fadeInUp"
+      >
         <HorizontalScrollbar
-          data={bodyParts}
+          data={bodyParts} //array of all body parts name
           bodyPart={bodyPart}
           setBodyPart={setBodyPart}
-          isBodyParts
+          isBodyParts //bool flag indicating body parts or exercise
         />
       </Box>
     </Stack>

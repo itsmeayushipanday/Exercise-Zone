@@ -1,7 +1,12 @@
+// react imports
 import { useContext } from "react";
+// component imports
 import { assets } from "../../assets/assets";
-import "./Main.css";
 import { Context } from "../../context/Context";
+import { useTheme } from "../../context/ThemeContext";
+import submitImage from "../../assets/submit.png";
+
+import "./Main.css";
 
 const Main = () => {
   const {
@@ -14,10 +19,18 @@ const Main = () => {
     input,
   } = useContext(Context);
 
+  const { theme } = useTheme();
+  const isDarkTheme = theme === "dark"; // Assuming 'theme' is a string in context
+
   return (
-    <div className="main">
+    <div className={`main ${isDarkTheme ? "dark-theme" : ""}`}>
       <div className="nav">
-        <p>React Genie</p>
+        <p
+          className="font-bold animate__animated animate__fadeIn"
+          style={{ color: isDarkTheme ? "white" : "#585858" }}
+        >
+          Exercise Genie
+        </p>
         <img
           src="https://e1.pxfuel.com/desktop-wallpaper/609/615/desktop-wallpaper-black-haired-female-anime-digital-art-anime-girls-pfp-cute-girls-anime-girl-cute-pfp.jpg"
           alt=""
@@ -35,20 +48,52 @@ const Main = () => {
               <p>How can I help you?</p>
             </div>
             <div className="cards">
-              <div className="card">
-                <p>Suggest beautiful places to see on an incoming road trip</p>
+              <div
+                className="card"
+                onClick={() => {
+                  const prompt = "Suggest exercises related to abs";
+                  //console.log("Card clicked with input:", prompt);
+                  setInput(prompt);
+                  onSent(prompt); // Pass the prompt directly
+                }}
+              >
+                <p>Suggest exercises related to abs</p>
                 <img src={assets.compass_icon} alt="" />
               </div>
-              <div className="card">
-                <p>Suggest beautiful places to see on an incoming road trip</p>
+              <div
+                className="card"
+                onClick={() => {
+                  const prompt = "Suggest a healthy exercise routine";
+                  //console.log("Card clicked with input:", prompt);
+                  setInput(prompt);
+                  onSent(prompt);
+                }}
+              >
+                <p>Suggest a healthy exercise routine</p>
                 <img src={assets.bulb_icon} alt="" />
               </div>
-              <div className="card">
-                <p>Suggest beautiful places to see on an incoming road trip</p>
+              <div
+                className="card"
+                onClick={() => {
+                  const prompt = "Suggest suryanamaskar yoga";
+                  //console.log("Card clicked with input:", prompt);
+                  setInput(prompt);
+                  onSent(prompt);
+                }}
+              >
+                <p>Suggest suryanamaskar yoga</p>
                 <img src={assets.message_icon} alt="" />
               </div>
-              <div className="card">
-                <p>Suggest beautiful places to see on an incoming road trip</p>
+              <div
+                className="card"
+                onClick={() => {
+                  const prompt = "Suggest gym exercises for girls";
+                  //console.log("Card clicked with input:", prompt);
+                  setInput(prompt);
+                  onSent(prompt);
+                }}
+              >
+                <p>Suggest gym exercises for girls</p>
                 <img src={assets.code_icon} alt="" />
               </div>
             </div>
@@ -85,17 +130,23 @@ const Main = () => {
               value={input}
               type="text"
               placeholder="Enter your prompt here..."
+              className={isDarkTheme && input ? "dark-input" : ""}
             />
             <div>
               <img src={assets.gallery_icon} alt="" />
               <img src={assets.mic_icon} alt="" />
               {input ? (
-                <img onClick={() => onSent()} src={assets.send_icon} alt="" />
+                <img
+                  onClick={() => onSent()}
+                  src={isDarkTheme ? submitImage : assets.send_icon} // Swap the image based on theme
+                  alt="submit"
+                  className="h-12 w-12"
+                />
               ) : null}
             </div>
           </div>
-          <p className="bottom-info font-bold text-lg">
-            React Genie may display inaccurate information, including about
+          <p className="bottom-info font-bold text-2xl">
+            Exercise Genie may display inaccurate information, including about
             people, so double check its responses.
           </p>
         </div>

@@ -1,8 +1,10 @@
 //home page--> Showing Result section
+//exercise cards
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button, Stack, Typography } from "@mui/material";
 
+//exerice here is basically the fetched body part data (name mostly)
 const ExerciseCard = ({ exercise }) => {
   return (
     <Link to={`/exercise/${exercise.id}`} className="exercise-card">
@@ -12,10 +14,12 @@ const ExerciseCard = ({ exercise }) => {
           sx={{
             ml: "21px",
             color: "#fff",
-            background: "#FFA9A9",
+            background: "#F53173",
             fontSize: "14px",
             borderRadius: "20px",
             textTransform: "capitalize",
+            width: { lg: "120px", xs: "100px" }, // Fixed width for consistency
+            height: "50px", // Set a fixed height as well
           }}
         >
           {exercise.bodyPart}
@@ -28,6 +32,8 @@ const ExerciseCard = ({ exercise }) => {
             fontSize: "14px",
             borderRadius: "20px",
             textTransform: "capitalize",
+            width: { lg: "120px", xs: "100px" }, // Fixed width for consistency
+            height: "50px", // Set a fixed height as well
           }}
         >
           {exercise.target}

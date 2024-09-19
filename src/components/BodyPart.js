@@ -1,4 +1,5 @@
 //home page-->body parts scroller component
+//component below search bar
 import React from "react";
 import { Stack, Typography } from "@mui/material";
 import Icon from "../assets/icons/gym.png";
@@ -11,9 +12,9 @@ const BodyPart = ({ item, bodyPart, setBodyPart }) => {
       justifyContent="center"
       className="bodyPart-card"
       sx={
-        bodyPart === item
+        bodyPart === item //body part names matches
           ? {
-              borderTop: "4px solid #F53173",
+              borderTop: "4px solid #F53173", //highlight it
               background: "#fff",
               borderBottomLeftRadius: "20px",
               width: "270px",
@@ -48,7 +49,7 @@ const BodyPart = ({ item, bodyPart, setBodyPart }) => {
         textTransform="capitalize"
       >
         {" "}
-        {item}
+        {item} Exercises
       </Typography>
     </Stack>
   );
