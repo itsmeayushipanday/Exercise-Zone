@@ -32,7 +32,7 @@ const Exercises = ({ exercises, setExercises, bodyPart }) => {
 
   useEffect(() => {
     const fetchExercisesData = async () => {
-      let exercisesData = []; //empty array
+      let exercisesData = []; // empty array
 
       if (bodyPart === "all") {
         exercisesData = await fetchData(
@@ -48,7 +48,8 @@ const Exercises = ({ exercises, setExercises, bodyPart }) => {
       setExercises(exercisesData);
     };
     fetchExercisesData();
-  }, [bodyPart]); //every time bodyPart changes, useEffect will re-render and exercises get's updated
+  }, [bodyPart, setExercises]); // Add setExercises as a dependency
+  //every time bodyPart changes, useEffect will re-render and exercises get's updated
 
   // Theme mode from custom hook
   const { themeMode } = useTheme();
