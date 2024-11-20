@@ -28,6 +28,7 @@ const SearchExercises = ({ bodyPart, setBodyPart, setExercises }) => {
         "https://exercisedb.p.rapidapi.com/exercises",
         exerciseOptions
       );
+      //method type, required parameters to make the API call work properly.
       //console.log(exerciseData);
       const searchedExercises = exerciseData.filter(
         (exercise) =>
