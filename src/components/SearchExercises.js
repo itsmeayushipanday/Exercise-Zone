@@ -1,14 +1,16 @@
-//react imports
 import React, { useState, useEffect } from "react";
-//material imports
 import { Box, Stack, Typography, Button, TextField } from "@mui/material";
-//component imports
 import { fetchData, exerciseOptions } from "../utils/fetchData";
 import HorizontalScrollbar from "./HorizontalScrollbar";
+import { useInView } from "react-intersection-observer";
 
 const SearchExercises = ({ bodyPart, setBodyPart, setExercises }) => {
   const [search, setSearch] = useState("");
   const [bodyParts, setBodyParts] = useState([]);
+
+  const { ref: headingRef, inView: headingInView } = useInView({ triggerOnce: true });
+  const { ref: inputRef, inView: inputInView } = useInView({ triggerOnce: true });
+  const { ref: scrollRef, inView: scrollInView } = useInView({ triggerOnce: true });
 
   useEffect(() => {
     const fetchBodyParts = async () => {
@@ -16,8 +18,7 @@ const SearchExercises = ({ bodyPart, setBodyPart, setExercises }) => {
         "https://exercisedb.p.rapidapi.com/exercises/bodyPartList",
         exerciseOptions
       );
-      //console.log(bodyPartData); fetched all body parts on rendering
-      setBodyParts(["all", ...bodyPartData]); //a list of all body parts
+      setBodyParts(["all", ...bodyPartData]);
     };
     fetchBodyParts();
   }, []);
@@ -28,8 +29,6 @@ const SearchExercises = ({ bodyPart, setBodyPart, setExercises }) => {
         "https://exercisedb.p.rapidapi.com/exercises",
         exerciseOptions
       );
-      //method type, required parameters to make the API call work properly.
-      //console.log(exerciseData);
       const searchedExercises = exerciseData.filter(
         (exercise) =>
           exercise.name.toLowerCase().includes(search) ||
@@ -37,7 +36,6 @@ const SearchExercises = ({ bodyPart, setBodyPart, setExercises }) => {
           exercise.equipment.toLowerCase().includes(search) ||
           exercise.bodyPart.toLowerCase().includes(search)
       );
-      //console.log(searchedExercises);
       setSearch("");
       setExercises(searchedExercises);
     }
@@ -46,21 +44,23 @@ const SearchExercises = ({ bodyPart, setBodyPart, setExercises }) => {
   return (
     <Stack alignItems="center" mt="37px" p="20px" justifyContent="center">
       <Typography
+        ref={headingRef}
         fontWeight={700}
         sx={{
           fontSize: { lg: "44px", xs: "30px" },
-          animation: "fadeInDown 1s",
+          animation: headingInView ? "fadeInDown 1s" : "none",
         }}
         mb="49px"
         textAlign="center"
-        className="animate__animated animate__fadeInDown"
+        className={headingInView ? "animate__animated animate__fadeInDown" : ""}
       >
         Awesome Exercises You <br /> Should Know
       </Typography>
       <Box
+        ref={inputRef}
         position="relative"
         mb="72px"
-        className="animate__animated animate__bounceIn"
+        className={inputInView ? "animate__animated animate__bounceIn" : ""}
       >
         <TextField
           sx={{
@@ -93,14 +93,20 @@ const SearchExercises = ({ bodyPart, setBodyPart, setExercises }) => {
         </Button>
       </Box>
       <Box
-        sx={{ position: "relative", width: "100%", p: "20px" }}
-        className="animate__animated animate__fadeInUp"
+        ref={scrollRef}
+        sx={{
+          position: "relative",
+          width: "100%",
+          p: "20px",
+          animation: scrollInView ? "fadeInUp 1s" : "none",
+        }}
+        className={scrollInView ? "animate__animated animate__fadeInUp" : ""}
       >
         <HorizontalScrollbar
-          data={bodyParts} //array of all body parts name
+          data={bodyParts}
           bodyPart={bodyPart}
           setBodyPart={setBodyPart}
-          isBodyParts //bool flag indicating body parts or exercise
+          isBodyParts
         />
       </Box>
     </Stack>

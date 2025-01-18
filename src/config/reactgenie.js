@@ -1,15 +1,6 @@
-/*
- * Install the Generative AI SDK
- *
- * $ npm install @google/generative-ai
- *
- * See the getting started guide for more information
- * https://ai.google.dev/gemini-api/docs/get-started/node
- */
-
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const apiKey = "AIzaSyAk-cfkr-alKiIZOmuAtw5ZUsmsvAr3prk";
+const apiKey = "AIzaSyDjn0KuOOES2F4PSA_g0AH8DQknENSVdyM";
 const genAI = new GoogleGenerativeAI(apiKey);
 
 const model = genAI.getGenerativeModel({
@@ -24,19 +15,26 @@ const generationConfig = {
   responseMimeType: "text/plain",
 };
 
-//prompt is the input given by the user
 async function run(prompt) {
   const chatSession = model.startChat({
     generationConfig,
-    // safetySettings: Adjust safety settings
-    // See https://ai.google.dev/gemini-api/docs/safety-settings
-    //array of history
     history: [],
   });
 
-  const result = await chatSession.sendMessage(prompt);
-  console.log(result.response.text());
-  return result.response.text();
+  try {
+    const result = await chatSession.sendMessage(prompt);
+    console.log(result.response.text());
+    return result.response.text();
+  } catch (error) {
+    if (error.message.includes("RATE_LIMIT_EXCEEDED")) {
+      console.log("Error: API rate limit exceeded. Please try again later.");
+      // Return a user-friendly message
+      return "Error: API rate limit exceeded. Please try again later.";
+    } else {
+      console.error("Error occurred:", error.message);
+      throw error; // Rethrow other types of errors
+    }
+  }
 }
 
 export default run;

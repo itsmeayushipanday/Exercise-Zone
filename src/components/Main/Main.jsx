@@ -32,11 +32,13 @@ const Main = () => {
           Exercise Genie
         </p>
         <img
-          src="https://e1.pxfuel.com/desktop-wallpaper/609/615/desktop-wallpaper-black-haired-female-anime-digital-art-anime-girls-pfp-cute-girls-anime-girl-cute-pfp.jpg"
+          src="https://media.istockphoto.com/id/1681388313/vector/cute-baby-panda-cartoon-on-white-background.jpg?s=612x612&w=0&k=20&c=qFrzn8TqONiSfwevvkYhys1z80NAmDfw3o-HRdwX0d8="
           alt=""
-          height={55}
-          width={65}
+          height={65}
+          width={70}
+          className="animate__animated animate__bounce"
         />
+
       </div>
       <div className="main-container">
         {!showResult ? (
@@ -102,7 +104,7 @@ const Main = () => {
           <div className="result">
             <div className="result-title">
               <img
-                src="https://e1.pxfuel.com/desktop-wallpaper/609/615/desktop-wallpaper-black-haired-female-anime-digital-art-anime-girls-pfp-cute-girls-anime-girl-cute-pfp.jpg"
+                src="https://media.istockphoto.com/id/1681388313/vector/cute-baby-panda-cartoon-on-white-background.jpg?s=612x612&w=0&k=20&c=qFrzn8TqONiSfwevvkYhys1z80NAmDfw3o-HRdwX0d8="
                 alt=""
                 height={55}
                 width={65}

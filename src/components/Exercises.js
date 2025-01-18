@@ -1,33 +1,50 @@
-//react imports
-import React, { useEffect, useState } from "react";
-//material imports
+import React, { useEffect, useState, useRef } from "react";
 import { Box, Stack, Typography } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
-//component imports
 import { exerciseOptions, fetchData } from "../utils/fetchData";
 import ExerciseCard from "./ExerciseCard";
 import { useTheme } from "../context/ThemeContext";
+import "animate.css";
+
+// Custom Hook to Check Visibility
+const useOnScreen = (ref) => {
+  const [isIntersecting, setIntersecting] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIntersecting(entry.isIntersecting);
+      },
+      { threshold: 0.1 } // Trigger when 10% of the element is visible
+    );
+
+    if (ref.current) observer.observe(ref.current);
+
+    return () => observer.disconnect();
+  }, [ref]);
+
+  return isIntersecting;
+};
+
 const Exercises = ({ exercises, setExercises, bodyPart }) => {
-  //exercise is in Home parent, got to searchExercise where got updated
-  //then this update one prop is passed to Exercises component in Home parent
-  //console.log(exercises);
   const [currentPage, setCurrentPage] = useState(1);
   const exercisesPerPage = 6;
-  // Pagination
-  const indexOfLastExercise = currentPage * exercisesPerPage; //1*6==6
-  const indexOfFirstExercise = indexOfLastExercise - exercisesPerPage; //6-6==0
-  //curr exercises from page 0 to 6
+
+  const indexOfLastExercise = currentPage * exercisesPerPage;
+  const indexOfFirstExercise = indexOfLastExercise - exercisesPerPage;
   const currentExercises = exercises.slice(
     indexOfFirstExercise,
     indexOfLastExercise
   );
+
   const paginate = (e, value) => {
     setCurrentPage(value);
     window.scrollTo({ top: 1800, behavior: "smooth" });
   };
+
   useEffect(() => {
     const fetchExercisesData = async () => {
-      let exercisesData = []; // empty array
+      let exercisesData = [];
       if (bodyPart === "all") {
         exercisesData = await fetchData(
           "https://exercisedb.p.rapidapi.com/exercises",
@@ -42,28 +59,50 @@ const Exercises = ({ exercises, setExercises, bodyPart }) => {
       setExercises(exercisesData);
     };
     fetchExercisesData();
-  }, [bodyPart]); 
-  //every time bodyPart changes, useEffect will re-render and exercises get's updated
-  // Theme mode from custom hook
+  }, [bodyPart]);
+
   const { themeMode } = useTheme();
   const isDarkTheme = themeMode === "dark";
+
+  // Refs for Animation
+  const sectionRef = useRef(null);
+  const isVisible = useOnScreen(sectionRef);
+
   return (
-    <Box id="exercises" sx={{ mt: { lg: "109px" } }} mt="50px" p="20px">
-      <Typography variant="h3" mb="46px">
+    <Box
+      id="exercises"
+      sx={{ mt: { lg: "109px" } }}
+      mt="50px"
+      p="20px"
+      ref={sectionRef}
+      className={isVisible ? "animate__animated animate__fadeIn" : ""}
+    >
+      <Typography
+        variant="h3"
+        mb="46px"
+        className={isVisible ? "animate__animated animate__fadeInDown" : ""}
+        sx={{
+          textAlign: "center",
+          color: isDarkTheme ? "white" : "black",
+        }}
+      >
         Showing Results
       </Typography>
+
       <Stack
         direction="row"
         sx={{ gap: { lg: "107px", xs: "50px" } }}
         flexWrap="wrap"
         justifyContent="center"
+        className={isVisible ? "animate__animated animate__fadeInUp" : ""}
       >
         {currentExercises.map((exercise, index) => (
-          <ExerciseCard key={index} exercise={exercise} /> //uses this exercise card to render the exercise
+          <ExerciseCard key={index} exercise={exercise} />
         ))}
       </Stack>
+
       <Stack mt="100px" alignItems="center">
-        {exercises.length > 9 && (
+        {exercises.length > exercisesPerPage && (
           <Pagination
             color="standard"
             shape="rounded"
@@ -71,21 +110,21 @@ const Exercises = ({ exercises, setExercises, bodyPart }) => {
             defaultPage={1}
             size="large"
             page={currentPage}
-            //onChange={(e) => paginate(e, value)}
             onChange={paginate}
             sx={{
               "& .MuiPaginationItem-root": {
-                color: isDarkTheme ? "white" : "black", //text color
+                color: isDarkTheme ? "white" : "black",
+                transition: "background-color 0.3s ease, color 0.3s ease",
               },
               "& .MuiPaginationItem-ellipsis": {
-                color: isDarkTheme ? "white" : "black", //ellipsis color
+                color: isDarkTheme ? "white" : "black",
               },
               "& .MuiPaginationItem-page.Mui-selected": {
-                backgroundColor: isDarkTheme ? "#007bff" : "#e0e0e0", //page color
+                backgroundColor: isDarkTheme ? "#007bff" : "#e0e0e0",
                 color: isDarkTheme ? "white" : "black",
               },
               "& .MuiPaginationItem-root:hover": {
-                backgroundColor: isDarkTheme ? "#0056b3" : "#f5f5f5", //hover color
+                backgroundColor: isDarkTheme ? "#0056b3" : "#f5f5f5",
               },
             }}
           />
@@ -94,4 +133,5 @@ const Exercises = ({ exercises, setExercises, bodyPart }) => {
     </Box>
   );
 };
+
 export default Exercises;
